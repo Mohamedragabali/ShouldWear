@@ -8,6 +8,7 @@ import android.location.Location
 import android.location.LocationManager
 import android.os.Bundle
 import android.provider.Settings
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -29,28 +30,25 @@ class MainActivity : AppCompatActivity() {
     }
     val client = OkHttpClient.Builder().addInterceptor(logInterceptor).build()
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
-    var latitude:Double?=null
-    var longitude:Double?=null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-
-        // makeRequestOkHttp()
-
-//        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
-//        getCurrentLocation()
-
+        setup()
     }
 
-    private fun makeRequestOkHttp() {
+    private fun setup() {
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
+        getCurrentLocation()
+    }
+
+    private fun makeRequestOkHttp(latitudeAndLongitude :String ) {
         val url = HttpUrl.Builder().scheme("http")
             .scheme("http")
             .host("api.weatherstack.com")
             .addPathSegment("current")
             .addQueryParameter("access_key", "e981dc11b9c12972fc6afca11f267171")
-            .addQueryParameter("query", "cairo")
+            .addQueryParameter("query", latitudeAndLongitude)
             .build()
 
         val request = Request.Builder()
@@ -59,14 +57,14 @@ class MainActivity : AppCompatActivity() {
 
         client.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
-                //
+                Log.v("ActivityMain","$e.message")
             }
 
             override fun onResponse(call: Call, response: Response) {
                 response.body?.string().let { jsonString ->
                     val result = Gson().fromJson(jsonString, WeatherResponse::class.java)
                     runOnUiThread {
-                        binding.myText.text = result.currentTemperature.toString()
+                        binding.myText.text = result.toString()
                     }
                 }
             }
@@ -95,8 +93,7 @@ class MainActivity : AppCompatActivity() {
                         Toast.makeText(this, "Null Recived", Toast.LENGTH_SHORT).show()
                     } else {
                         Toast.makeText(this, "Get Success", Toast.LENGTH_SHORT).show()
-                        latitude =location.latitude
-                        longitude =location.longitude
+                        makeRequestOkHttp("${location.latitude} , ${location.longitude}")
                     }
                 }
             } else {
@@ -160,4 +157,5 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(applicationContext, "Denied", Toast.LENGTH_SHORT).show()
         }
     }
+
 }
