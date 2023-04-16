@@ -64,7 +64,10 @@ class MainActivity : AppCompatActivity() {
                 response.body?.string().let { jsonString ->
                     val result = Gson().fromJson(jsonString, WeatherResponse::class.java)
                     runOnUiThread {
-                        binding.myText.text = result.toString()
+                        binding.tempreaturDescription.text =result.currentTemperature.weather_descriptions[0]
+                        binding.tempreatureDegree.text =result.currentTemperature.temperature
+                        binding.cityName.text =result.location.cityName
+                        binding.time.text = result.location.localtime.substring(0,9)
                     }
                 }
             }
@@ -92,7 +95,7 @@ class MainActivity : AppCompatActivity() {
                     if (location == null) {
                         Toast.makeText(this, "Null Recived", Toast.LENGTH_SHORT).show()
                     } else {
-                        Toast.makeText(this, "Get Success", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, "Successful Git", Toast.LENGTH_SHORT).show()
                         makeRequestOkHttp("${location.latitude} , ${location.longitude}")
                     }
                 }
