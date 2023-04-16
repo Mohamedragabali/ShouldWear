@@ -42,13 +42,14 @@ class MainActivity : AppCompatActivity() {
         getCurrentLocation()
     }
 
-    private fun makeRequestOkHttp(latitudeAndLongitude :String ) {
-        val url = HttpUrl.Builder().scheme("http")
+    private fun makeRequestOkHttp(latitudeAndLongitude: String) {
+        val url = HttpUrl.Builder()
             .scheme("http")
-            .host("api.weatherstack.com")
-            .addPathSegment("current")
-            .addQueryParameter("access_key", "e981dc11b9c12972fc6afca11f267171")
-            .addQueryParameter("query", latitudeAndLongitude)
+            .host("api.weatherapi.com")
+            .addPathSegment("v1")
+            .addPathSegment("current.json")
+            .addQueryParameter("key", "226051f0f0564da7bbd212417231604")
+            .addQueryParameter("q", latitudeAndLongitude)
             .build()
 
         val request = Request.Builder()
@@ -57,17 +58,14 @@ class MainActivity : AppCompatActivity() {
 
         client.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
-                Log.v("ActivityMain","$e.message")
+                Log.v("ActivityMain", "$e.message")
             }
 
             override fun onResponse(call: Call, response: Response) {
                 response.body?.string().let { jsonString ->
                     val result = Gson().fromJson(jsonString, WeatherResponse::class.java)
                     runOnUiThread {
-                        binding.tempreaturDescription.text =result.currentTemperature.weather_descriptions[0]
-                        binding.tempreatureDegree.text =result.currentTemperature.temperature
-                        binding.cityName.text =result.location.cityName
-                        binding.time.text = result.location.localtime.substring(0,10)
+                        setUiComponent(result)
                     }
                 }
             }
@@ -161,4 +159,147 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+
+    private fun setUiComponent(weather: WeatherResponse) {
+        binding.welcomeUser?.text = "Your outfit Today"
+        binding.cityName.text = weather.location.cityName
+        binding.tempreaturDescription.text = weather.currentTemperature.weather_descriptions.text
+        binding.tempreatureDegree.text = weather.currentTemperature.temperature
+        binding.time.text = weather.location.localtime.substring(0, 10)
+
+        chooseOutFit(weather.currentTemperature.temperature.toDouble())
+    }
+
+    fun chooseOutFit(temperature: Double) {
+        val randomNumber = listOf(1, 2, 3, 4, 5, 6, 7).random()
+        if (temperature < 15.0) {
+            when (randomNumber) {
+                1 -> {
+                    changeClothesInUi(
+                        R.drawable.bantalon1,
+                        R.drawable.hour1,
+                        R.drawable.shouse1,
+                        R.drawable.jacket1
+                    )
+                }
+                2 -> {
+                    changeClothesInUi(
+                        R.drawable.bantalon2,
+                        R.drawable.hour2,
+                        R.drawable.shouse2,
+                        R.drawable.jacket2
+                    )
+                }
+                3 -> {
+                    changeClothesInUi(
+                        R.drawable.bantalon3,
+                        R.drawable.hour3,
+                        R.drawable.shouse3,
+                        R.drawable.jacket3
+                    )
+                }
+                4 -> {
+                    changeClothesInUi(
+                        R.drawable.bantalon4,
+                        R.drawable.hour4,
+                        R.drawable.shouse4,
+                        R.drawable.jacket4
+                    )
+                }
+                5 -> {
+                    changeClothesInUi(
+                        R.drawable.bantalon5,
+                        R.drawable.hour5,
+                        R.drawable.shouse5,
+                        R.drawable.jacket5
+                    )
+                }
+                6 -> {
+                    changeClothesInUi(
+                        R.drawable.bantalon6,
+                        R.drawable.hour6,
+                        R.drawable.shouse6,
+                        R.drawable.jacket6
+                    )
+                }
+                else -> {
+                    changeClothesInUi(
+                        R.drawable.bantalon7,
+                        R.drawable.hour7,
+                        R.drawable.shouse7,
+                        R.drawable.jacket7
+                    )
+                }
+            }
+        } else {
+            when (randomNumber) {
+                1 -> {
+                    changeClothesInUi(
+                        R.drawable.bantalon1,
+                        R.drawable.hour1,
+                        R.drawable.shouse1,
+                        R.drawable.tesheart1
+                    )
+                }
+                2 -> {
+                    changeClothesInUi(
+                        R.drawable.bantalon2,
+                        R.drawable.hour2,
+                        R.drawable.shouse2,
+                        R.drawable.tesheart2
+                    )
+                }
+                3 -> {
+                    changeClothesInUi(
+                        R.drawable.bantalon3,
+                        R.drawable.hour3,
+                        R.drawable.shouse3,
+                        R.drawable.tesheart3
+                    )
+                }
+                4 -> {
+                    changeClothesInUi(
+                        R.drawable.bantalon4,
+                        R.drawable.hour4,
+                        R.drawable.shouse4,
+                        R.drawable.tesheart4
+                    )
+                }
+                5 -> {
+                    changeClothesInUi(
+                        R.drawable.bantalon5,
+                        R.drawable.hour5,
+                        R.drawable.shouse5,
+                        R.drawable.tesheart5
+                    )
+                }
+                6 -> {
+                    changeClothesInUi(
+                        R.drawable.bantalon6,
+                        R.drawable.hour6,
+                        R.drawable.shouse6,
+                        R.drawable.tesheart6
+                    )
+                }
+                else -> {
+                    changeClothesInUi(
+                        R.drawable.bantalon7,
+                        R.drawable.hour7,
+                        R.drawable.shouse7,
+                        R.drawable.tesheart7
+                    )
+                }
+            }
+        }
+
+
+    }
+
+    private fun changeClothesInUi(bantalon: Int, hour: Int, shoes: Int, teshart: Int) {
+        binding.pantalon.setImageResource(bantalon)
+        binding.hour.setImageResource(hour)
+        binding.shouse.setImageResource(shoes)
+        binding.teshert.setImageResource(teshart)
+
+    }
 }
