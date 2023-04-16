@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="background">#DE1A2237</color>
+    <color name="background_card">#5E293281</color>
+    <color name="city_color">#A3A7B2</color>
+    <color name="descraption_color">#DEFAFAFA</color>
+    <color name="time_color">#ADB3C1</color>
+    <color name="temprature_degree">#FAFAFA</color>
+    <color name="mid_line">#BCC3CD</color>
+    <color name="icon_color">#A3A7B2</color>
+
+</resources>
