@@ -67,7 +67,7 @@ class MainActivity : AppCompatActivity() {
                         binding.tempreaturDescription.text =result.currentTemperature.weather_descriptions[0]
                         binding.tempreatureDegree.text =result.currentTemperature.temperature
                         binding.cityName.text =result.location.cityName
-                        binding.time.text = result.location.localtime.substring(0,9)
+                        binding.time.text = result.location.localtime.substring(0,10)
                     }
                 }
             }

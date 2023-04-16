@@ -36,6 +36,12 @@
         app:layout_constraintTop_toBottomOf="@+id/city_name" />
 
 
+    <View
+        android:layout_width="8dp"
+        android:layout_height="8dp"
+        app:layout_constraintTop_toTopOf="@id/mid_line"
+        android:background="@drawable/degree_icon"
+        app:layout_constraintStart_toEndOf="@+id/tempreature_degree"/>
     <TextView
         android:id="@+id/tempreature_degree"
         android:layout_width="wrap_content"
