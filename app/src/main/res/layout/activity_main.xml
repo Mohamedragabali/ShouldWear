@@ -89,7 +89,6 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintTop_toBottomOf="@+id/welcome_user"
-        android:layout_marginTop="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         android:orientation="horizontal">
         <LinearLayout
