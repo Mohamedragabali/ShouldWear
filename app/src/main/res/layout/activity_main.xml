@@ -79,7 +79,7 @@
         android:id="@+id/welcome_user"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="hallo user "
+        android:text="Welcome outfit Today"
         android:textSize="24sp"
         app:layout_constraintTop_toBottomOf="@id/mid_line"
         android:layout_marginTop="8dp"
