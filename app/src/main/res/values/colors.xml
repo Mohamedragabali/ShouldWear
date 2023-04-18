@@ -6,6 +6,7 @@
     <color name="descraption_color">#1B212F</color>
     <color name="time_color">#95989E</color>
     <color name="temprature_degree">#1D233B</color>
-    <color name="mid_line">#C2C3C8</color>
+    <color name="mid_line">#5EC2C3C8</color>
     <color name="icon_color">#3E424D</color>
+    <color name="welcom_text">#DE121212</color>
 </resources>

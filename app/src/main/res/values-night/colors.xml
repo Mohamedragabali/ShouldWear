@@ -6,7 +6,7 @@
     <color name="descraption_color">#DEFAFAFA</color>
     <color name="time_color">#ADB3C1</color>
     <color name="temprature_degree">#FAFAFA</color>
-    <color name="mid_line">#BCC3CD</color>
+    <color name="mid_line">#5EBCC3CD</color>
     <color name="icon_color">#A3A7B2</color>
-
+    <color name="welcom_text">#DEFAFAFA</color>
 </resources>

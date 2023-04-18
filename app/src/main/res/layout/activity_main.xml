@@ -19,7 +19,6 @@
         android:textColor="@color/city_color"
         android:textSize="32sp"
         android:drawableStart="@drawable/location_icon"
-        android:drawableEnd="@drawable/down_arrow"
         android:fontFamily="sans-serif-medium"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -27,7 +26,7 @@
 
     <View
         android:id="@+id/mid_line"
-        android:layout_width="4dp"
+        android:layout_width="2dp"
         android:layout_height="64dp"
         android:layout_marginTop="24dp"
         android:background="@color/mid_line"
@@ -57,7 +56,7 @@
     <TextView
         android:id="@+id/tempreatur_description"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="28dp"
         android:layout_marginStart="32dp"
         android:text="Cloudy"
         android:textColor="@color/descraption_color"
@@ -68,7 +67,7 @@
     <TextView
         android:id="@+id/time"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="28dp"
         android:textColor="@color/time_color"
         android:text=" 21 October"
         android:textSize="24sp"
@@ -80,6 +79,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Welcome outfit Today"
+        android:textColor="@color/welcom_text"
         android:textSize="24sp"
         app:layout_constraintTop_toBottomOf="@id/mid_line"
         android:layout_marginTop="16dp"
