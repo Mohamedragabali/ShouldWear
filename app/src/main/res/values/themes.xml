@@ -6,7 +6,8 @@
         <item name="colorPrimaryVariant">@color/background</item>
         <item name="colorOnPrimary">@color/city_color</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor">@color/city_color</item>
+        <item name="android:statusBarColor">@color/background</item>
+        <item name="android:windowLightStatusBar">true</item>
         <!-- Customize your theme here. -->
     </style>
 </resources>
