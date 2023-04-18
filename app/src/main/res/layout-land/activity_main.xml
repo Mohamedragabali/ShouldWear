@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-medium"
-        android:text=" Copenhagen "
+        tools:text=" Copenhagen "
         android:textColor="@color/city_color"
         android:textSize="32sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -44,7 +44,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="32dp"
-        android:text="24"
+        tools:text="24"
         android:textColor="@color/temprature_degree"
         android:textSize="64sp"
         app:layout_constraintBottom_toBottomOf="@+id/mid_line"
@@ -56,7 +56,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:text="Cloudy"
+        tools:text="Cloudy"
         android:textColor="@color/descraption_color"
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/time"
@@ -66,7 +66,7 @@
         android:id="@+id/time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=" 21 October"
+        tools:text=" 21 October"
         android:textColor="@color/time_color"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="@id/mid_line"
@@ -86,7 +86,7 @@
             android:layout_height="match_parent"
             android:layout_weight="2"
             android:background="@drawable/background_img"
-            android:src="@drawable/test_img" />
+            tools:src="@drawable/test_img" />
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/pantalon"
@@ -95,7 +95,7 @@
             android:layout_weight="2"
             android:layout_marginHorizontal="16dp"
             android:background="@drawable/background_img"
-            android:src="@drawable/test_img" />
+            tools:src="@drawable/test_img" />
         <LinearLayout
             android:layout_width="0dp"
             android:layout_weight="1"
@@ -108,7 +108,7 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:background="@drawable/background_img"
-                android:src="@drawable/test_img"/>
+                tools:src="@drawable/test_img"/>
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/shouse"
@@ -118,7 +118,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
                 android:background="@drawable/background_img"
-                android:src="@drawable/test_img" />
+                tools:src="@drawable/test_img" />
         </LinearLayout>
     </LinearLayout>
 

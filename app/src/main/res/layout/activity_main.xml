@@ -9,20 +9,18 @@
     android:padding="16dp"
     android:paddingBottom="16dp">
 
-
-
     <TextView
         android:id="@+id/city_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=" Copenhagen "
+        tools:text=" Copenhagen "
         android:textColor="@color/city_color"
         android:textSize="32sp"
-        android:drawableStart="@drawable/location_icon"
         android:fontFamily="sans-serif-medium"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:drawableStartCompat="@drawable/location_icon" />
 
     <View
         android:id="@+id/mid_line"
@@ -46,7 +44,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="32dp"
-        android:text="24"
+        tools:text="24"
         android:textColor="@color/temprature_degree"
         android:textSize="64sp"
         app:layout_constraintBottom_toBottomOf="@+id/mid_line"
@@ -58,7 +56,7 @@
         android:layout_width="wrap_content"
         android:layout_height="28dp"
         android:layout_marginStart="32dp"
-        android:text="Cloudy"
+        tools:text="Cloudy"
         android:textColor="@color/descraption_color"
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/time"
@@ -69,7 +67,7 @@
         android:layout_width="wrap_content"
         android:layout_height="28dp"
         android:textColor="@color/time_color"
-        android:text=" 21 October"
+        tools:text=" 21 October"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="@id/mid_line"
         app:layout_constraintStart_toStartOf="@+id/tempreatur_description" />
@@ -78,7 +76,7 @@
         android:id="@+id/welcome_user"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Welcome outfit Today"
+        android:text="@string/welcom_messege"
         android:textColor="@color/welcom_text"
         android:textSize="24sp"
         app:layout_constraintTop_toBottomOf="@id/mid_line"
@@ -104,7 +102,8 @@
                 android:layout_marginEnd="16dp"
                 android:layout_marginVertical="16dp"
                 android:background="@drawable/background_img"
-                android:src="@drawable/test_img"/>
+                tools:src="@drawable/test_img"
+                tools:ignore="NestedWeights" />
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/hour"
                 android:layout_width="match_parent"
@@ -112,7 +111,7 @@
                 android:layout_weight="1"
                 android:layout_marginEnd="16dp"
                 android:background="@drawable/background_img"
-                android:src="@drawable/test_img"/>
+                tools:src="@drawable/test_img"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="0dp"
@@ -126,15 +125,15 @@
                 android:layout_marginVertical="16dp"
                 android:layout_weight="3"
                 android:background="@drawable/background_img"
-                android:src="@drawable/test_img"
-                />
+                tools:src="@drawable/test_img"
+                tools:ignore="NestedWeights" />
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/shouse"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:background="@drawable/background_img"
-                android:src="@drawable/test_img"/>
+                tools:src="@drawable/test_img"/>
         </LinearLayout>
 
     </LinearLayout>

@@ -1,6 +1,7 @@
 package com.mohamedragab.shouldwear.ui
 
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -50,10 +51,11 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun setUiView(weather: WeatherResponse) {
+    @SuppressLint("SetTextI18n")
+    private fun setupUi(weather: WeatherResponse) {
         binding.cityName.text = weather.location.cityName
         binding.tempreaturDescription.text = weather.currentTemperature.weather_descriptions.text
-        binding.tempreatureDegree.text = weather.currentTemperature.temperature
+        binding.tempreatureDegree.text = "${weather.currentTemperature.temperature}c"
         binding.time.text = TimeToday.todayDate
 
         val outFitComponent = outFitClothes.chooseOutFit(
@@ -88,7 +90,7 @@ class MainActivity : AppCompatActivity() {
                 response.body?.string().let { jsonString ->
                     val result = Gson().fromJson(jsonString, WeatherResponse::class.java)
                     runOnUiThread {
-                        setUiView(result)
+                        setupUi(result)
                     }
                 }
             }
