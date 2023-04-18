@@ -1,45 +1,18 @@
-package com.mohamedragab.shouldwear
+package com.mohamedragab.shouldwear.utils
 
-import android.annotation.SuppressLint
-import android.content.SharedPreferences
-import com.mohamedragab.shouldwear.data.WeatherResponse
-import java.text.SimpleDateFormat
-import java.util.*
+import android.content.Context
+import com.mohamedragab.shouldwear.R
+import com.mohamedragab.shouldwear.model.OutFit
 
-class GetUiComponent(sharedPreferences: SharedPreferences) {
-    private val savedInSharedPrefrence = SavedInSharedPrefrence(sharedPreferences)
-    private lateinit var cityName: String
-    private lateinit var tempreaturDescription: String
-    private lateinit var tempreatureDegree: String
-    private lateinit var time: String
-    private var teshart: Int = 0
-    private var bantalon: Int = 0
-    private var hour: Int = 0
-    private var shoes: Int = 0
-    private lateinit var day: String
-    private val DataAndTime = Calendar.getInstance().getTime()
+class OutFitClothes(context: Context) {
 
-    @SuppressLint("SimpleDateFormat")
-    val formatData = SimpleDateFormat("EEE, d MMM")
-
-    @SuppressLint("SimpleDateFormat")
-    private val formatTime = SimpleDateFormat("d")
-    private val lastOutFit = savedInSharedPrefrence.getLastOutFit()
-    private val lastDayOpenApp = savedInSharedPrefrence.getLastDayOpenApp()
+    private val sharedPrefrence = SharedPrefrence(context)
+    private val lastOutFit = sharedPrefrence.getLastOutFitWear()
+    private val lastDayOpenApp = sharedPrefrence.getLastDayOpenApp()
     private val listOfMyOutFitclothes = listOf(1, 2, 3, 4, 5, 6, 7)
     private var numberOfOutFit = 0
 
-    fun setUiView(weather: WeatherResponse) {
-        cityName = weather.location.cityName
-        tempreaturDescription = weather.currentTemperature.weather_descriptions.text
-        tempreatureDegree = weather.currentTemperature.temperature
-        time = formatData.format(DataAndTime)
-        day = formatTime.format(DataAndTime)
-
-        chooseOutFitNumber(weather.currentTemperature.temperature.toDouble(), day.toInt())
-    }
-
-    private fun chooseOutFitNumber(temperature: Double, day: Int) {
+    fun chooseOutFit(temperature: Double, day: Int): OutFit {
 
         if (lastDayOpenApp == day) {
             numberOfOutFit = lastOutFit
@@ -49,22 +22,22 @@ class GetUiComponent(sharedPreferences: SharedPreferences) {
             } else {
                 numberOfOutFit = listOfMyOutFitclothes.filter { it != lastOutFit }.random()
             }
-            savedInSharedPrefrence.setOutFitToday(numberOfOutFit)
-            savedInSharedPrefrence.setDayOpenApp(day)
+            sharedPrefrence.setOutFitNumberWearToday(numberOfOutFit)
+            sharedPrefrence.setDayOpenApp(day)
         }
         if (temperature < 15.0) {
-            ColdClothes(numberOfOutFit)
+            return getColdClothes(numberOfOutFit)
 
         } else {
-            SunnyClothes(numberOfOutFit)
+            return getSunnyClothes(numberOfOutFit)
         }
 
     }
 
-    private fun SunnyClothes(numberOutFit: Int) {
+    private fun getSunnyClothes(numberOutFit: Int): OutFit {
         when (numberOutFit) {
             1 -> {
-                changeClothesInUi(
+                return OutFit(
                     R.drawable.bantalon1,
                     R.drawable.hour1,
                     R.drawable.shouse1,
@@ -72,7 +45,7 @@ class GetUiComponent(sharedPreferences: SharedPreferences) {
                 )
             }
             2 -> {
-                changeClothesInUi(
+                return OutFit(
                     R.drawable.bantalon2,
                     R.drawable.hour2,
                     R.drawable.shouse2,
@@ -80,7 +53,7 @@ class GetUiComponent(sharedPreferences: SharedPreferences) {
                 )
             }
             3 -> {
-                changeClothesInUi(
+                return OutFit(
                     R.drawable.bantalon3,
                     R.drawable.hour3,
                     R.drawable.shouse3,
@@ -88,7 +61,7 @@ class GetUiComponent(sharedPreferences: SharedPreferences) {
                 )
             }
             4 -> {
-                changeClothesInUi(
+                return OutFit(
                     R.drawable.bantalon4,
                     R.drawable.hour4,
                     R.drawable.shouse4,
@@ -96,7 +69,7 @@ class GetUiComponent(sharedPreferences: SharedPreferences) {
                 )
             }
             5 -> {
-                changeClothesInUi(
+                return OutFit(
                     R.drawable.bantalon5,
                     R.drawable.hour5,
                     R.drawable.shouse5,
@@ -104,7 +77,7 @@ class GetUiComponent(sharedPreferences: SharedPreferences) {
                 )
             }
             6 -> {
-                changeClothesInUi(
+                return OutFit(
                     R.drawable.bantalon6,
                     R.drawable.hour6,
                     R.drawable.shouse6,
@@ -112,7 +85,7 @@ class GetUiComponent(sharedPreferences: SharedPreferences) {
                 )
             }
             else -> {
-                changeClothesInUi(
+                return OutFit(
                     R.drawable.bantalon7,
                     R.drawable.hour7,
                     R.drawable.shouse7,
@@ -122,10 +95,10 @@ class GetUiComponent(sharedPreferences: SharedPreferences) {
         }
     }
 
-    private fun ColdClothes(numberOutFit: Int) {
+    private fun getColdClothes(numberOutFit: Int): OutFit {
         when (numberOutFit) {
             1 -> {
-                changeClothesInUi(
+                return OutFit(
                     R.drawable.bantalon1,
                     R.drawable.hour1,
                     R.drawable.shouse1,
@@ -133,7 +106,7 @@ class GetUiComponent(sharedPreferences: SharedPreferences) {
                 )
             }
             2 -> {
-                changeClothesInUi(
+                return OutFit(
                     R.drawable.bantalon2,
                     R.drawable.hour2,
                     R.drawable.shouse2,
@@ -141,7 +114,7 @@ class GetUiComponent(sharedPreferences: SharedPreferences) {
                 )
             }
             3 -> {
-                changeClothesInUi(
+                return OutFit(
                     R.drawable.bantalon3,
                     R.drawable.hour3,
                     R.drawable.shouse3,
@@ -149,7 +122,7 @@ class GetUiComponent(sharedPreferences: SharedPreferences) {
                 )
             }
             4 -> {
-                changeClothesInUi(
+                return OutFit(
                     R.drawable.bantalon4,
                     R.drawable.hour4,
                     R.drawable.shouse4,
@@ -157,7 +130,7 @@ class GetUiComponent(sharedPreferences: SharedPreferences) {
                 )
             }
             5 -> {
-                changeClothesInUi(
+                return OutFit(
                     R.drawable.bantalon5,
                     R.drawable.hour5,
                     R.drawable.shouse5,
@@ -165,7 +138,7 @@ class GetUiComponent(sharedPreferences: SharedPreferences) {
                 )
             }
             6 -> {
-                changeClothesInUi(
+                return OutFit(
                     R.drawable.bantalon6,
                     R.drawable.hour6,
                     R.drawable.shouse6,
@@ -173,7 +146,7 @@ class GetUiComponent(sharedPreferences: SharedPreferences) {
                 )
             }
             else -> {
-                changeClothesInUi(
+                return OutFit(
                     R.drawable.bantalon7,
                     R.drawable.hour7,
                     R.drawable.shouse7,
@@ -183,21 +156,5 @@ class GetUiComponent(sharedPreferences: SharedPreferences) {
         }
     }
 
-    private fun changeClothesInUi(bantalon: Int, hour: Int, shoes: Int, teshart: Int) {
-       this.bantalon =bantalon
-        this.hour = hour
-        this.teshart = teshart
-        this.shoes = shoes
-    }
-
-
-    fun getCityName() =cityName
-    fun getTempreaturDescription() =tempreaturDescription
-    fun gettempreatureDegree() =tempreatureDegree
-    fun getTime() = time
-    fun getTeshart() =teshart
-    fun getBantalon() =bantalon
-    fun gethour() =hour
-    fun getShoes() =shoes
 
 }

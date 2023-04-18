@@ -1,4 +1,4 @@
-package com.mohamedragab.shouldwear.data
+package com.mohamedragab.shouldwear.model
 
 import com.google.gson.annotations.SerializedName
 

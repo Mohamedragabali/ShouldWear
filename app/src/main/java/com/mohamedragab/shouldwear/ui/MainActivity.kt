@@ -1,9 +1,8 @@
-package com.mohamedragab.shouldwear
+package com.mohamedragab.shouldwear.ui
 
 
 import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.location.Location
 import android.location.LocationManager
@@ -16,8 +15,10 @@ import androidx.core.app.ActivityCompat
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.gson.Gson
-import com.mohamedragab.shouldwear.data.WeatherResponse
+import com.mohamedragab.shouldwear.utils.OutFitClothes
+import com.mohamedragab.shouldwear.model.WeatherResponse
 import com.mohamedragab.shouldwear.databinding.ActivityMainBinding
+import com.mohamedragab.shouldwear.utils.TimeToday
 import okhttp3.*
 import okhttp3.logging.HttpLoggingInterceptor
 import java.io.IOException
@@ -31,8 +32,8 @@ class MainActivity : AppCompatActivity() {
     }
     val client = OkHttpClient.Builder().addInterceptor(logInterceptor).build()
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
-    lateinit var sharedPreferences :SharedPreferences
-    lateinit var  getUiComponent: GetUiComponent
+    lateinit var outFitClothes: OutFitClothes
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -41,25 +42,29 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setup() {
-        sharedPreferences = getSharedPreferences("application", Context.MODE_PRIVATE)
-        getUiComponent =GetUiComponent(sharedPreferences)
+        outFitClothes = OutFitClothes(applicationContext)
 
-        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(applicationContext)
+        fusedLocationProviderClient =
+            LocationServices.getFusedLocationProviderClient(applicationContext)
         getCurrentLocation()
 
     }
 
     private fun setUiView(weather: WeatherResponse) {
-        getUiComponent.setUiView(weather)
-        binding.cityName.text = getUiComponent.getCityName()
-        binding.tempreaturDescription.text = getUiComponent.getTempreaturDescription()
-        binding.time.text = getUiComponent.getTime()
-        binding.tempreatureDegree.text = getUiComponent.gettempreatureDegree()
-        binding.teshert.setImageResource(getUiComponent.getTeshart())
-        binding.pantalon.setImageResource(getUiComponent.getBantalon())
-        binding.shouse.setImageResource(getUiComponent.getShoes())
-        binding.hour.setImageResource(getUiComponent.gethour())
+        binding.cityName.text = weather.location.cityName
+        binding.tempreaturDescription.text = weather.currentTemperature.weather_descriptions.text
+        binding.tempreatureDegree.text = weather.currentTemperature.temperature
+        binding.time.text = TimeToday.todayDate
+
+        val outFitComponent = outFitClothes.chooseOutFit(
+            weather.currentTemperature.temperature.toDouble(), TimeToday.day
+        )
+        binding.teshert.setImageResource(outFitComponent.tesheart)
+        binding.pantalon.setImageResource(outFitComponent.bantalon)
+        binding.shouse.setImageResource(outFitComponent.shouse)
+        binding.hour.setImageResource(outFitComponent.hour)
     }
+
     private fun makeRequestOkHttp(latitudeAndLongitude: String) {
         val url = HttpUrl.Builder()
             .scheme("http")
@@ -90,7 +95,6 @@ class MainActivity : AppCompatActivity() {
 
         })
     }
-
 
 
     private fun getCurrentLocation() {
